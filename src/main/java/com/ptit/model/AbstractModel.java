@@ -1,6 +1,8 @@
 package com.ptit.model;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AbstractModel<T> {
 	private Long id;
@@ -9,6 +11,69 @@ public class AbstractModel<T> {
 	private String createdBy;
 	private String modifiBy;
 	private long[] ids;
+	private List<T> listResult = new ArrayList<>();
+	private Integer page;
+	private Integer maxPageItem;
+	private Integer totalItem;
+	private Integer totalPage;
+	private String sortName;
+	private String sortBy;
+
+	public List<T> getListResult() {
+		return listResult;
+	}
+
+	public void setListResult(List<T> listResult) {
+		this.listResult = listResult;
+	}
+
+	public Integer getPage() {
+		return page;
+	}
+
+	public void setPage(Integer page) {
+		this.page = page;
+	}
+
+	public Integer getMaxPageItem() {
+		return maxPageItem;
+	}
+
+	public void setMaxPageItem(Integer maxPageItem) {
+		this.maxPageItem = maxPageItem;
+	}
+
+	public Integer getTotalItem() {
+		return totalItem;
+	}
+
+	public void setTotalItem(Integer totalItem) {
+		this.totalItem = totalItem;
+	}
+
+	public Integer getTotalPage() {
+		return totalPage;
+	}
+
+	public void setTotalPage(Integer totalPage) {
+		this.totalPage = totalPage;
+	}
+
+	public String getSortName() {
+		return sortName;
+	}
+
+	public void setSortName(String sortName) {
+		this.sortName = sortName;
+	}
+
+	public String getSortBy() {
+		return sortBy;
+	}
+
+	public void setSortBy(String sortBy) {
+		this.sortBy = sortBy;
+	}
 
 	public long[] getIds() {
 		return ids;

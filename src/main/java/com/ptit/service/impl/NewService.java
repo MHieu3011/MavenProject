@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import com.ptit.dao.INewDAO;
 import com.ptit.model.NewModel;
+import com.ptit.paging.Pageble;
 import com.ptit.service.INewService;
 
 public class NewService implements INewService {
@@ -49,6 +50,16 @@ public class NewService implements INewService {
 		for (long id : ids) {
 			newDAO.delete(id);
 		}
+	}
+
+	@Override
+	public List<NewModel> findAll(Pageble pageble) {
+		return newDAO.findAll(pageble);
+	}
+
+	@Override
+	public int getTotalItem() {
+		return newDAO.getTotalItem();
 	}
 
 }
