@@ -1,6 +1,7 @@
 package com.ptit.controller.web;
 
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
@@ -15,8 +16,9 @@ import com.ptit.service.ICategoryService;
 import com.ptit.service.INewService;
 import com.ptit.service.IUserService;
 import com.ptit.utils.FormUtil;
+import com.ptit.utils.SessionUtil;
 
-@WebServlet(urlPatterns = { "/trang-chu", "/dang-nhap" })
+@WebServlet(urlPatterns = { "/trang-chu", "/dang-nhap", "/thoat" })
 public class HomeController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -30,14 +32,27 @@ public class HomeController extends HttpServlet {
 	@Inject
 	private IUserService userService;
 
+	private ResourceBundle resourceBundle = ResourceBundle.getBundle("message");
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setAttribute("testCategoryModel", categoryService.findAll());
 		req.setAttribute("testNewModel", newService.findByCategoryId(2L));
 		String action = req.getParameter("action");
 		if (action != null && action.equals("login")) {
+			String message = req.getParameter("message");
+			String alert = req.getParameter("alert");
+			if (message != null && alert != null) {
+				req.setAttribute("message", resourceBundle.getString(message));
+				req.setAttribute("alert", alert);
+			}
 			RequestDispatcher rd = req.getRequestDispatcher("/views/login.jsp");
 			rd.forward(req, resp);
+		} else if (action != null && action.equals("logout")) {
+			SessionUtil.getInstance().removeValue(req, "USERMODEL");
+			resp.sendRedirect(req.getContextPath() + "/trang-chu");
+			// RequestDispatcher rd = req.getRequestDispatcher("/views/web/home.jsp");
+			// rd.forward(req, resp);
 		} else {
 			RequestDispatcher rd = req.getRequestDispatcher("/views/web/home.jsp");
 			rd.forward(req, resp);
@@ -51,13 +66,15 @@ public class HomeController extends HttpServlet {
 			UserModel model = FormUtil.toModel(UserModel.class, req);
 			model = userService.findByUsernameAndPasswordAndStatus(model.getUsername(), model.getPassword(), 1);
 			if (model != null) {
+				SessionUtil.getInstance().putValue(req, "USERMODEL", model);
 				if (model.getRole().getCode().equals("ADMIN")) {
 					resp.sendRedirect(req.getContextPath() + "/admin-home");
 				} else if (model.getRole().getCode().equals("USER")) {
 					resp.sendRedirect(req.getContextPath() + "/trang-chu");
 				}
 			} else {
-				resp.sendRedirect(req.getContextPath() + "/dang-nhap?action=login");
+				resp.sendRedirect(req.getContextPath()
+						+ "/dang-nhap?action=login&message=username_password_invalid&alert=danger");
 			}
 		}
 	}

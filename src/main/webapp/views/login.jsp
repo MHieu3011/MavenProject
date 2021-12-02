@@ -13,6 +13,9 @@
 			<div class="user_card">
 				<div class="d-flex justify-content-center form_container">
 					<form action='<c:url value = "/dang-nhap?action=login"/>' method="post">
+						<div class="alert alert-${alert}">
+						  ${message}
+						</div>
 						<div class="input-group mb-3">
 							<div class="input-group-append">
 								<span class="input-group-text"><i class="fas fa-user"></i></span>
