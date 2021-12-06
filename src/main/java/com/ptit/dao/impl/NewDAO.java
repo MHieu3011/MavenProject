@@ -2,6 +2,8 @@ package com.ptit.dao.impl;
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.ptit.dao.INewDAO;
 import com.ptit.mapper.impl.NewMapper;
 import com.ptit.model.NewModel;
@@ -49,7 +51,8 @@ public class NewDAO extends AbstractDAO<NewModel> implements INewDAO {
 	@Override
 	public List<NewModel> findAll(Pageble pageble) {
 		StringBuilder sql = new StringBuilder("SELECT * FROM new");
-		if (pageble.getSorter() != null) {
+		if (pageble.getSorter() != null && StringUtils.isNotBlank(pageble.getSorter().getSortName())
+				&& StringUtils.isNotBlank(pageble.getSorter().getSortBy())) {
 			sql.append(" ORDER BY " + pageble.getSorter().getSortName() + " " + pageble.getSorter().getSortBy());
 		}
 		if (pageble.getOffset() != null && pageble.getLimit() != null) {

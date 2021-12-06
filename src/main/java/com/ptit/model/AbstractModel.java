@@ -18,6 +18,15 @@ public class AbstractModel<T> {
 	private Integer totalPage;
 	private String sortName;
 	private String sortBy;
+	private String type;
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
 
 	public List<T> getListResult() {
 		return listResult;

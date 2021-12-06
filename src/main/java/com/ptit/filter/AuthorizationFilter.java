@@ -12,6 +12,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ptit.constant.SystemConstant;
 import com.ptit.model.UserModel;
 import com.ptit.utils.SessionUtil;
 
@@ -31,18 +32,17 @@ public class AuthorizationFilter implements Filter {
 		HttpServletRequest request = (HttpServletRequest) servletRequest;
 		HttpServletResponse response = (HttpServletResponse) servletResponse;
 		String url = request.getRequestURI();
+		//if(url.matches("(.*)admin(.*)") || url.matches("(.*)delete(.*)") || url.matches("(.*)select(.*)")) {
 		if (url.startsWith(request.getContextPath() + "/admin")) {
 			UserModel model = (UserModel) SessionUtil.getInstance().getValue(request, "USERMODEL");
 			if (model != null) {
-				if (model.getRole().getCode().equals("ADMIN")) {
+				if (model.getRole().getCode().equals(SystemConstant.ADMIN)) {
 					filterChain.doFilter(request, response);
-				} else if (model.getRole().getCode().equals("USER")) {
-					response.sendRedirect(
-							request.getContextPath() + "/dang-nhap?action=login&message=not_permission&alert=danger");
+				} else if (model.getRole().getCode().equals(SystemConstant.USER)) {
+					response.sendRedirect(request.getContextPath() + "/dang-nhap?action=login&message=not_permission&alert=danger");
 				}
 			} else {
-				response.sendRedirect(
-						request.getContextPath() + "/dang-nhap?action=login&message=not_login&alert=danger");
+				response.sendRedirect(request.getContextPath() + "/dang-nhap?action=login&message=not_login&alert=danger");
 			}
 		} else {
 			filterChain.doFilter(request, response);

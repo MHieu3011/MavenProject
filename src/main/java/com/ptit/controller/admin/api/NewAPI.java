@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ptit.model.NewModel;
+import com.ptit.model.UserModel;
 import com.ptit.service.INewService;
+import com.ptit.utils.SessionUtil;
 
 @WebServlet(urlPatterns = { "/api-admin-new" })
 public class NewAPI extends HttpServlet {
@@ -27,6 +29,7 @@ public class NewAPI extends HttpServlet {
 		resp.setContentType("application/json");
 		ObjectMapper mapper = new ObjectMapper();
 		NewModel newModel = mapper.readValue(req.getInputStream(), NewModel.class);
+		newModel.setCreatedBy(((UserModel) SessionUtil.getInstance().getValue(req, "USERMODEL")).getFullname());
 		newModel = newService.save(newModel);
 		mapper.writeValue(resp.getOutputStream(), newModel);
 	}
@@ -37,6 +40,7 @@ public class NewAPI extends HttpServlet {
 		resp.setContentType("application/json");
 		ObjectMapper mapper = new ObjectMapper();
 		NewModel newModel = mapper.readValue(req.getInputStream(), NewModel.class);
+		newModel.setModifiBy(((UserModel) SessionUtil.getInstance().getValue(req, "USERMODEL")).getFullname());
 		newModel = newService.update(newModel);
 		mapper.writeValue(resp.getOutputStream(), newModel);
 	}

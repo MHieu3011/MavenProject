@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import com.ptit.dao.ICategoryDAO;
 import com.ptit.dao.INewDAO;
 import com.ptit.model.NewModel;
 import com.ptit.paging.Pageble;
@@ -15,9 +16,14 @@ public class NewService implements INewService {
 	@Inject
 	private INewDAO newDAO;
 
+	@Inject
+	ICategoryDAO categoryDAO;
+
 	@Override
 	public NewModel findOne(Long id) {
-		return newDAO.findOne(id);
+		NewModel newModel = newDAO.findOne(id);
+		newModel.setCategoryCode(categoryDAO.findOne(newModel.getCategoryId()).getCode());
+		return newModel;
 	}
 
 	@Override
@@ -28,7 +34,8 @@ public class NewService implements INewService {
 	@Override
 	public NewModel save(NewModel newModel) {
 		newModel.setCreatedDate(new Timestamp(System.currentTimeMillis()));
-		newModel.setCreatedBy("");
+		//newModel.setCreatedBy("");
+		newModel.setCategoryId(categoryDAO.findOneByCode(newModel.getCategoryCode()).getId());
 		Long id = newDAO.save(newModel);
 		return newDAO.findOne(id);
 	}
@@ -40,7 +47,8 @@ public class NewService implements INewService {
 		newModel.setCreatedDate(model.getCreatedDate());
 		newModel.setCreatedBy(model.getCreatedBy());
 		newModel.setModifiedDate(new Timestamp(System.currentTimeMillis()));
-		newModel.setModifiBy("");
+		//newModel.setModifiBy("");
+		newModel.setCategoryId(categoryDAO.findOneByCode(newModel.getCategoryCode()).getId());
 		newDAO.update(newModel);
 		return newDAO.findOne(id);
 	}

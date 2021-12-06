@@ -15,6 +15,7 @@
 		<driver.mysql.version>8.0.13</driver.mysql.version>
 		<weld.servlet.version>2.4.8.Final</weld.servlet.version>
 		<beanutils.version>1.9.4</beanutils.version>
+		<commons.lang.version>2.6</commons.lang.version>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
@@ -51,7 +52,6 @@
 			<version>${weld.servlet.version}</version>
 		</dependency>
 
-		<!-- json -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>
@@ -77,13 +77,18 @@
 			<artifactId>jackson-core-asl</artifactId>
 			<version>1.9.13</version>
 		</dependency>
-		<!--end json -->
-		
+
 		<dependency>
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils</artifactId>
 			<version>${beanutils.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>${commons.lang.version}</version>
+		</dependency>
+
 
 	</dependencies>
 

@@ -6,6 +6,15 @@ public class NewModel extends AbstractModel<NewModel> {
 	private String shortdescription;
 	private String content;
 	private Long categoryId;
+	private String categoryCode;
+
+	public String getCategoryCode() {
+		return categoryCode;
+	}
+
+	public void setCategoryCode(String categoryCode) {
+		this.categoryCode = categoryCode;
+	}
 
 	public String getTitle() {
 		return title;
