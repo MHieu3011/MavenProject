@@ -10,6 +10,7 @@ public class UserDAO extends AbstractDAO<UserModel> implements IUserDAO {
 
 	@Override
 	public UserModel findByUsernameAndPasswordAndStatus(String username, String password, Integer status) {
+		//String sql = "Select * From user where username = " + username + " AND password = " + password;
 		StringBuilder sql = new StringBuilder("SELECT * FROM user AS u");
 		sql.append(" INNER JOIN role AS r ON r.id = u.roleid");
 		sql.append(" WHERE username = ? AND password = ? AND status = ?");

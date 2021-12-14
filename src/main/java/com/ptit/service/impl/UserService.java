@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import com.ptit.dao.IUserDAO;
 import com.ptit.model.UserModel;
 import com.ptit.service.IUserService;
+import com.ptit.utils.HashFunctionUtil;
 
 public class UserService implements IUserService {
 
@@ -13,7 +14,7 @@ public class UserService implements IUserService {
 
 	@Override
 	public UserModel findByUsernameAndPasswordAndStatus(String username, String password, Integer status) {
-		return userDAO.findByUsernameAndPasswordAndStatus(username, password, status);
+		return userDAO.findByUsernameAndPasswordAndStatus(username, HashFunctionUtil.MD5(password), status);
 	}
 
 }
