@@ -33,7 +33,7 @@ public class AuthorizationFilter implements Filter {
 		HttpServletResponse response = (HttpServletResponse) servletResponse;
 		String url = request.getRequestURI();
 		if (url.matches("(.*)admin(.*)") || url.matches("(.*)delete(.*)") || url.matches("(.*)select(.*)")
-				|| url.matches("(.*)union(.*)") || url.matches("(.*)'(.*)")) {
+				|| url.matches("(.*)union(.*)") || url.matches("(.*)'(.*)") || url.matches("(.*)--(.*)")) {
 			UserModel model = (UserModel) SessionUtil.getInstance().getValue(request, "USERMODEL");
 			if (model != null) {
 				if (model.getRole().getCode().equals(SystemConstant.ADMIN)) {

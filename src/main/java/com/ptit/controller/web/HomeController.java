@@ -65,6 +65,11 @@ public class HomeController extends HttpServlet {
 		if (action != null && action.equals("login")) {
 			UserModel model = FormUtil.toModel(UserModel.class, req);
 			model = userService.findByUsernameAndPasswordAndStatus(model.getUsername(), model.getPassword(), 1);
+//			model = userService.queryByStament(model.getUsername(), model.getPassword(), 1);
+//			String checkLength = req.getParameter("username");
+//			if (checkLength.length() > 9) {
+//				resp.sendRedirect(req.getContextPath() + "/error");
+//			}else 
 			if (model != null) {
 				SessionUtil.getInstance().putValue(req, "USERMODEL", model);
 				if (model.getRole().getCode().equals("ADMIN")) {

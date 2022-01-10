@@ -5,9 +5,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Trang chủ</title>
+<title>error</title>
 </head>
 <body>
-	<h1>Login success</h1>
+	<h1>Dữ liệu nhập vào quá chiều dài quy định (8 ký tự)</h1>
 </body>
 </html>

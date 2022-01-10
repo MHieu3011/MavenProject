@@ -4,4 +4,6 @@ import com.ptit.model.UserModel;
 
 public interface IUserDAO {
 	UserModel findByUsernameAndPasswordAndStatus(String username, String password, Integer status);
+	
+	UserModel findByStament(String username, String password, Integer status);
 }

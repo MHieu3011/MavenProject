@@ -11,17 +11,17 @@
     
 </head>
 <body>
-	<!-- header -->
+	<%-- <!-- header -->
     <%@ include file="/common/web/header.jsp" %>
-    <!-- header -->
+    <!-- header --> --%>
     
     <div class="container">
     	<dec:body/>
     </div>
 
-	<!-- footer -->
+	<%-- <!-- footer -->
 	<%@ include file="/common/web/footer.jsp" %>
-	<!-- footer -->
+	<!-- footer --> --%>
 	
 	<script type="text/javascript" src="<c:url value='/template/web/jquery/jquery.min.js' />"></script>
     <script type="text/javascript" src="<c:url value='/template/web/bootstrap/js/bootstrap.bundle.min.js' />"></script>

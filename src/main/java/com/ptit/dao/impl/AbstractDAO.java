@@ -54,6 +54,7 @@ public class AbstractDAO<T> implements GenericDAO<T> {
 		List<T> results = new ArrayList<>();
 		Connection connection = null;
 		PreparedStatement statement = null;
+//		Statement statement = null;
 		ResultSet resultSet = null;
 		try {
 			connection = getConnection();
